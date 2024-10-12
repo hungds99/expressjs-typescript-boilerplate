@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# TypeScript
+*.tsbuildinfo
+
+# Build directories
+dist/
+build/
+
+# Environment variables
+.env
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# MacOS
+.DS_Store
+
+# Miscellaneous
+*.swp
+*.bak
+*.tmp
+*.orig
+*.rej
+*.gz
+
+# Local files
+local/
+drizzle/
