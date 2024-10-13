@@ -1,5 +1,5 @@
-import { Application, Router } from 'express';
-import middlewares from '../../middlewares';
+import { Router } from 'express';
+import authenticate from '../../middlewares/authenticate';
 import { wrapHandler } from '../../utils';
 import createUser from './create-user';
 import deleteUser from './delete-user';
@@ -7,20 +7,15 @@ import getUser from './get-user';
 import listUsers from './list-users';
 import updateUser from './update-user';
 
-const route = Router();
+export default (route: Router) => {
+  const usersRoute = Router();
+  route.use('/users', usersRoute);
 
-export default (app: Application) => {
-  app.use('/users', route);
+  usersRoute.get('/', authenticate(), wrapHandler(listUsers));
+  usersRoute.get('/:id', authenticate(), wrapHandler(getUser));
+  usersRoute.post('/', authenticate(), wrapHandler(createUser));
+  usersRoute.put('/:id', authenticate(), wrapHandler(updateUser));
+  usersRoute.delete('/:id', authenticate(), wrapHandler(deleteUser));
 
-  route.get('/', middlewares.authenticate(), wrapHandler(listUsers));
-
-  route.get('/:id', middlewares.authenticate(), wrapHandler(getUser));
-
-  route.post('/', middlewares.authenticate(), wrapHandler(createUser));
-
-  route.put('/:id', middlewares.authenticate(), wrapHandler(updateUser));
-
-  route.delete('/:id', middlewares.authenticate(), wrapHandler(deleteUser));
-
-  return app;
+  return route;
 };

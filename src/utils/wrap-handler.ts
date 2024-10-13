@@ -11,14 +11,14 @@ export const wrapHandler = (fn: handler): RequestHandler => {
         message:
           'Provided request body contains errors. Please check the data and retry the request',
       });
+      return;
     }
 
     try {
-      await fn(req, res);
+      return await fn(req, res);
     } catch (err) {
+      console.log('NEXT ERROR HANDLER');
       next(err);
     }
-
-    return;
   };
 };

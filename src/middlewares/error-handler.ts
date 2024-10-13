@@ -1,8 +1,7 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-export default () => {
-  return (err: Error, req: Request, res: Response) => {
-    console.log('Error handler middleware');
-    res.status(500).json({ message: 'Internal server error' });
+export const errorHandler = () => {
+  return (err: Error, req: Request, res: Response, next: NextFunction) => {
+    res.status(500).json({ message: 'Something went wrong!!' });
   };
 };

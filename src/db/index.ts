@@ -1,9 +1,9 @@
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/connect';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
 
-async function main() {
-  const db = await drizzle('node-postgres', process.env.DATABASE_URL!);
-  console.log('Database connected: ', db);
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+const db = drizzle(pool); // <--- sync
 
-main();
+export default db;

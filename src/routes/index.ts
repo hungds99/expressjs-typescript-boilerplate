@@ -1,12 +1,16 @@
 import { Application, Router } from 'express';
-import users from './users';
-
-const route = Router();
+import { errorHandler } from '../middlewares';
+import userRoutes from './users';
 
 export default (app: Application) => {
-  app.use('/api', route);
+  const apiRoute = Router();
+  app.use('/api', apiRoute);
 
-  users(app);
+  // Routes
+  userRoutes(apiRoute);
+
+  // Error handling
+  app.use(errorHandler());
 
   return app;
 };
