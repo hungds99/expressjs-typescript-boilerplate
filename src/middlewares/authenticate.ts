@@ -1,29 +1,33 @@
-import { NextFunction, RequestHandler } from 'express';
+import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import {
-  AppAuthenticatedRequest,
-  AppRequest,
-  AppResponse,
-} from '../types/http';
+import { APIAuthenticatedRequest, APIRequest } from '../types';
 
-export default (): RequestHandler => {
-  return (req: AppRequest, res: AppResponse, next: NextFunction): void => {
-    const token = req.header('Authorization');
-    if (!token) {
-      res.status(401).json({ message: 'Unauthorized' });
-      return;
-    }
+export const authenticate = (
+  req: APIRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.header('Authorization');
+  if (!token) {
+    res.status(401).json({ message: 'Unauthorized' });
+    return;
+  }
 
-    try {
-      const req_ = req as AppAuthenticatedRequest;
-      const decoded = jwt.verify(token, 'secret');
-      req_.user = decoded as { id: string; email: string };
-      next();
-    } catch (error) {
-      console.error(error);
-      res.status(400).json({ message: 'Invalid token' });
-    }
+  try {
+    const decoded = jwt.verify(token, 'secret');
 
-    return next();
-  };
+    // Attach the user object to the request
+    (req as APIAuthenticatedRequest).user = decoded as {
+      id: string;
+      username: string;
+      email: string;
+    }; // Customize based on your JWT payload
+
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'Invalid token' });
+  }
+
+  return next();
 };

@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import authenticate from '../../middlewares/authenticate';
-import { wrapHandler } from '../../utils';
+import { authenticate } from '../../middlewares';
 import createUser from './create-user';
 import deleteUser from './delete-user';
 import getUser from './get-user';
@@ -11,11 +10,13 @@ export default (route: Router) => {
   const usersRoute = Router();
   route.use('/users', usersRoute);
 
-  usersRoute.get('/', authenticate(), wrapHandler(listUsers));
-  usersRoute.get('/:id', authenticate(), wrapHandler(getUser));
-  usersRoute.post('/', authenticate(), wrapHandler(createUser));
-  usersRoute.put('/:id', authenticate(), wrapHandler(updateUser));
-  usersRoute.delete('/:id', authenticate(), wrapHandler(deleteUser));
+  // usersRoute.use(authenticate);
+
+  usersRoute.get('/', listUsers);
+  usersRoute.get('/:id', getUser);
+  usersRoute.post('/', createUser);
+  usersRoute.put('/:id', updateUser);
+  usersRoute.delete('/:id', deleteUser);
 
   return route;
 };

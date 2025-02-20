@@ -1,7 +1,18 @@
+import { Response } from 'express';
 import { userService } from '../../services';
-import { AppAuthenticatedRequest, AppResponse } from '../../types';
+import { APIAuthenticatedRequest, APIResponse } from '../../types';
 
-export default async (req: AppAuthenticatedRequest, res: AppResponse) => {
+export default async (
+  req: APIAuthenticatedRequest,
+  res: Response<APIResponse>
+): Promise<void> => {
   await userService.create('1212');
-  res.status(200).json({ message: 'create-user' });
+
+  const response: APIResponse = {
+    data: { message: 'Welcome to the public API!' },
+    message: 'Success',
+    statusCode: 200,
+  };
+
+  res.status(200).json(response);
 };
