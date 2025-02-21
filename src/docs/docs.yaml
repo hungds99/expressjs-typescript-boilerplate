@@ -1,0 +1,16 @@
+openapi: 3.1.0
+info:
+  title: Express TS API
+  description: Building a RESTful API with Node.js, Express, and PostgreSQL.
+  contact:
+    name: Express TS API
+    email: example@gmail.com
+  version: 1.0.0
+servers:
+  - url: /api
+tags:
+  - name: Users
+    description: User management
+paths:
+  /users:
+    $ref: paths/users.yaml

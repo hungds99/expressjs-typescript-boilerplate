@@ -1,9 +1,9 @@
 import cors from 'cors';
-import 'dotenv/config';
 import express from 'express';
 import routes from './routes';
+import { env } from './utils';
 
-const port: number = 3000;
+const port: number = env.PORT;
 const app = express();
 
 const bootstrap = async (): Promise<void> => {

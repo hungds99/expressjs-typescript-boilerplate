@@ -14,6 +14,7 @@ const envSchema = z.object({
 const validateEnv = () => {
   try {
     const env = envSchema.parse(process.env);
+    console.log('✅ Environment variables are valid');
     return env;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
