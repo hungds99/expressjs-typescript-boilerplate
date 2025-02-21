@@ -1,0 +1,157 @@
+get:
+  summary: Get user by ID
+  description: Retrieve a user by unique ID
+  tags:
+    - Users
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The ID of the user to retrieve
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/User.yaml'
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError400'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError401'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError403'
+    '404':
+      description: User not found
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError404'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError500'
+
+put:
+  summary: Update user by ID
+  description: Update a user by unique ID
+  tags:
+    - Users
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The ID of the user to update
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/User.yaml'
+  responses:
+    '200':
+      description: User updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/User.yaml'
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError400'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError401'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError403'
+    '404':
+      description: User not found
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError404'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError500'
+
+delete:
+  summary: Delete user by ID
+  description: Delete a user by unique ID
+  tags:
+    - Users
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The ID of the user to delete
+      schema:
+        type: string
+  responses:
+    '204':
+      description: User deleted successfully
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError400'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError401'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError403'
+    '404':
+      description: User not found
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError404'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/HttpError.yaml#/HttpError500'

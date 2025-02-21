@@ -12,5 +12,15 @@ tags:
   - name: Users
     description: User management
 paths:
+  /health-check:
+    $ref: paths/health-check.yaml
   /users:
     $ref: paths/users.yaml
+  /users/{id}:
+    $ref: paths/user.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

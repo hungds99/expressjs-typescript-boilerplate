@@ -1,0 +1,112 @@
+HttpError400:
+  type: object
+  properties:
+    code:
+      type: integer
+      example: 400
+    type:
+      type: string
+      enum:
+        - duplicate_error
+        - not_allowed
+        - invalid_data
+        - not_found
+        - database_error
+      example: 'invalid_data'
+    message:
+      type: string
+      example: 'Bad Request'
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+          message:
+            type: string
+      example:
+        - field: 'email'
+          message: 'Email is required'
+        - field: 'name'
+          message: 'Name is too short'
+  required:
+    - code
+    - type
+    - message
+
+HttpError401:
+  type: object
+  properties:
+    code:
+      type: integer
+      example: 401
+    type:
+      type: string
+      enum:
+        - not_allowed
+      example: 'not_allowed'
+    message:
+      type: string
+      example: 'Unauthorized'
+  required:
+    - code
+    - type
+    - message
+
+HttpError403:
+  type: object
+  properties:
+    code:
+      type: integer
+      example: 403
+    type:
+      type: string
+      enum:
+        - not_allowed
+      example: 'not_allowed'
+    message:
+      type: string
+      example: 'Forbidden'
+  required:
+    - code
+    - type
+    - message
+
+HttpError404:
+  type: object
+  properties:
+    code:
+      type: integer
+      example: 404
+    type:
+      type: string
+      enum:
+        - not_found
+      example: 'not_found'
+    message:
+      type: string
+      example: 'User not found'
+  required:
+    - code
+    - type
+    - message
+
+HttpError500:
+  type: object
+  properties:
+    code:
+      type: integer
+      example: 500
+    type:
+      type: string
+      enum:
+        - database_error
+      example: 'database_error'
+    message:
+      type: string
+      example: 'Internal server error'
+  required:
+    - code
+    - type
+    - message
