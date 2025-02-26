@@ -47,3 +47,7 @@ nodemon.json
 .eslintrc
 .eslintignore
 jest.config.js
+
+# Local files
+local/
+drizzle/
